@@ -15,5 +15,9 @@ namespace Authorization.RazorPages.Entities
         [Required(ErrorMessage = "{0} обязательно")]
         [Display(Name = "Отчество")]
         public string Middlename { get; set; }
+
+        [Phone(ErrorMessage = "{0} некорректный")]
+        [Display(Name = "Номер телефона")]
+        override public string PhoneNumber { get; set; }
     }
 }

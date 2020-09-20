@@ -2,15 +2,13 @@
 @model Authorization.RazorPages.Pages.Roles.DeleteModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Удалить";
 }
 
-<h1>Delete</h1>
+<h1>Роль</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Вы действительно желаете удалить этого пользователя?</h3>
 <div>
-    <h4>ApplicationRole</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ApplicationRole.Name)
