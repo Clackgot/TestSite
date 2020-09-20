@@ -10,15 +10,8 @@ using Microsoft.Extensions.Logging;
 namespace Authorization.RazorPages.Pages
 {
     [AllowAnonymous]
-    public class PrivacyModel : PageModel
+    public class TaskModel : PageModel
     {
-        private readonly ILogger<PrivacyModel> _logger;
-
-        public PrivacyModel(ILogger<PrivacyModel> logger)
-        {
-            _logger = logger;
-        }
-
         public void OnGet()
         {
         }

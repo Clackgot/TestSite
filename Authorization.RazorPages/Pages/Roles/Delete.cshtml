@@ -5,12 +5,13 @@
     ViewData["Title"] = "Удалить";
 }
 
+<h1>Удалить</h1>
 
-<h3>Вы действительно желаете удалить роль @Html.DisplayFor(model => model.ApplicationRole.Name)?</h3>
-<div>
-    <form method="post">
-        <input type="hidden" asp-for="ApplicationRole.Id" />
-        <input type="submit" value="Удалить" class="btn btn-danger" /> |
-        <a asp-page="./Index">Назад</a>
-    </form>
-</div>
+<h3>Вы действительно хотите удалить роль @Html.DisplayFor(model => model.ApplicationRole.Name)?</h3>
+
+<form method="post">
+    <input type="hidden" asp-for="ApplicationRole.Id" />
+    <input type="submit" value="Удалить" class="btn btn-danger" /> |
+    <a asp-page="./Index">Назад</a>
+</form>
+

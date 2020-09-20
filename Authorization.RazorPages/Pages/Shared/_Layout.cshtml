@@ -29,16 +29,24 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Главная</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Задание</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Task">Задание</a>
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Users/Index">Пользователи</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Roles/Index">Роли</a>
-                            </li>
+
+                            @if (User.Claims.ToList()[3].Value == "Администратор" || User.Claims.ToList()[3].Value == "Модератор")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Account/Users/Index">Администрирование</a>
+                                </li>
+                            }
+                            @if (User.Claims.ToList()[3].Value == "Администратор")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-page="/Roles/Index">Роли</a>
+                                </li>
+                            }
+
                         }
                     </ul>
                 </div>
@@ -53,7 +61,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - Authorization.RazorPages - <a asp-area="" asp-page="/Privacy">Права</a>
+            &copy; 2020 - Authorization.RazorPages
         </div>
     </footer>
 

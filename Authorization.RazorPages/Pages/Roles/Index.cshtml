@@ -6,10 +6,6 @@
 }
 
 <h1>Роли</h1>
-
-<p>
-    <a asp-page="Create">Создать новую</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -26,7 +22,6 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Редактировать</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Удалить</a>
             </td>
         </tr>

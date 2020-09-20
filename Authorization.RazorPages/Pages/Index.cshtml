@@ -1,5 +1,8 @@
 ﻿@page
 @model IndexModel
+@using Microsoft.AspNetCore.Identity
+@using Authorization.RazorPages.Entities
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Главная";
 }

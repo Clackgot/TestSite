@@ -10,9 +10,11 @@ using Authorization.RazorPages.Data;
 using Authorization.RazorPages.Entities;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Authorization.RazorPages.Pages.Account.Users
 {
+    [Authorize(Policy = "Модератор")]
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;

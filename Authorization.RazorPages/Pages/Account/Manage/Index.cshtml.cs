@@ -23,6 +23,8 @@ namespace Authorization.RazorPages.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
+        
+        [Display(Name = "Email")]
         public string Username { get; set; }
 
         [TempData]
@@ -30,6 +32,8 @@ namespace Authorization.RazorPages.Pages.Account.Manage
 
         [BindProperty]
         public InputModel Input { get; set; }
+        public OutputModel Output { get; set; }
+
 
         public class InputModel
         {
@@ -38,16 +42,36 @@ namespace Authorization.RazorPages.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
+        public class OutputModel
+        {
+            [Required(ErrorMessage = "{0} обязательно")]
+            [Display(Name = "Имя")]
+            public string FirstName { get; set; }
+            [Required(ErrorMessage = "{0} обязательна")]
+            [Display(Name = "Фамилия")]
+            public string LastName { get; set; }
+            [Required(ErrorMessage = "{0} обязательно")]
+            [Display(Name = "Отчество")]
+            public string MiddleName { get; set; }
+        }
+
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
+            
             Username = userName;
 
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber
+            };
+            Output = new OutputModel
+            {
+
+                FirstName = user.FirstName,
+                MiddleName = user.Middlename,
+                LastName = user.LastName
             };
         }
 

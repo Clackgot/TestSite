@@ -14,9 +14,9 @@ namespace Authorization.RazorPages.Pages.Roles
     [Authorize(Policy = "Администратор")]
     public class IndexModel : PageModel
     {
-        private readonly Authorization.RazorPages.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public IndexModel(Authorization.RazorPages.Data.ApplicationDbContext context)
+        public IndexModel(ApplicationDbContext context)
         {
             _context = context;
         }

@@ -74,20 +74,30 @@ namespace Authorization.RazorPages.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)//Если модель валидна
             {
-                var user = new ApplicationUser { 
-                    FirstName = Input.FirstName, 
-                    LastName = Input.LastName, 
-                    Middlename = Input.Middlename, 
-                    Email = Input.Email, 
-                    UserName = Input.Email };//Перенос данных из представления в модель
+                var user = new ApplicationUser
+                {
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    Middlename = Input.Middlename,
+                    Email = Input.Email,
+                    UserName = Input.Email
+                };//Перенос данных из представления в модель
                 var result = await _userManager.CreateAsync(user, Input.Password); //Создание пользователя, с заданным паролем
                 if (result.Succeeded)//Если пользователь создан
                 {
                     _logger.LogInformation($"Пользователь {user.LastName} {user.FirstName} успешно создан");//Вывод информации в логгер
-                    await _userManager.AddToRoleAsync(user, "Пользователь");
+
+                    try
+                    {
+                        var addedRoleToUser = await _userManager.AddToRoleAsync(user, "Пользователь");
+                    }
+                    catch
+                    {
+                        return NotFound("Не удалось присвоить пользователю роль \"Пользователь\"");
+                    }
 
                     await _signInManager.SignInAsync(user, isPersistent: false);//Вход в аккаунт созданного пользователя
-                        return LocalRedirect(returnUrl);//Переход к запрашиваему ресурсу
+                    return LocalRedirect(returnUrl);//Переход к запрашиваему ресурсу
                 }
                 foreach (var error in result.Errors)//Сохранение ошибок в модель
                 {
