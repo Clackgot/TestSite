@@ -5,34 +5,12 @@
     ViewData["Title"] = "Удалить";
 }
 
-<h1>Роль</h1>
 
-<h3>Вы действительно желаете удалить этого пользователя?</h3>
+<h3>Вы действительно желаете удалить роль @Html.DisplayFor(model => model.ApplicationRole.Name)?</h3>
 <div>
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ApplicationRole.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ApplicationRole.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ApplicationRole.NormalizedName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ApplicationRole.NormalizedName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ApplicationRole.ConcurrencyStamp)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ApplicationRole.ConcurrencyStamp)
-        </dd>
-    </dl>
-    
     <form method="post">
         <input type="hidden" asp-for="ApplicationRole.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+        <a asp-page="./Index">Назад</a>
     </form>
 </div>

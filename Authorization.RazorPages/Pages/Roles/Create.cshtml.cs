@@ -12,9 +12,9 @@ namespace Authorization.RazorPages.Pages.Roles
 {
     public class CreateModel : PageModel
     {
-        private readonly Authorization.RazorPages.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public CreateModel(Authorization.RazorPages.Data.ApplicationDbContext context)
+        public CreateModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -27,8 +27,6 @@ namespace Authorization.RazorPages.Pages.Roles
         [BindProperty]
         public ApplicationRole ApplicationRole { get; set; }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

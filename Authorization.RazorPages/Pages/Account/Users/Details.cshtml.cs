@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Authorization.RazorPages.Data;
 using Authorization.RazorPages.Entities;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Authorization.RazorPages.Pages.Account.Users
 {
@@ -23,6 +24,7 @@ namespace Authorization.RazorPages.Pages.Account.Users
         }
 
         public ApplicationUser ApplicationUser { get; set; }
+        [Display(Name = "Роль")]
         public string ApplicationUserRoleName { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)

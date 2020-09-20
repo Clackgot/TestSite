@@ -84,7 +84,7 @@ namespace Authorization.RazorPages.Pages.Account
                 if (result.Succeeded)//Если пользователь создан
                 {
                     _logger.LogInformation($"Пользователь {user.LastName} {user.FirstName} успешно создан");//Вывод информации в логгер
-                    await _userManager.AddToRoleAsync(user, "User");
+                    await _userManager.AddToRoleAsync(user, "Пользователь");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);//Вход в аккаунт созданного пользователя
                         return LocalRedirect(returnUrl);//Переход к запрашиваему ресурсу

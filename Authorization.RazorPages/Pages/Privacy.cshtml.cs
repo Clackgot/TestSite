@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Authorization.RazorPages.Pages
 {
-    [Authorize(Policy = "Administrator")]
+    [AllowAnonymous]
     public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;

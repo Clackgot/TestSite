@@ -47,22 +47,23 @@ namespace Authorization.RazorPages
             services.AddAuthorization(options =>
             {
                 //Доступ к контроллерам с [Authorize(Policy = "Manager")]
-                options.AddPolicy("Manager", builder =>
+                options.AddPolicy("Модератор", builder =>
                 {
-                    builder.RequireAssertion(x => x.User.HasClaim(ClaimTypes.Role, "Manager") ||
-                                             x.User.HasClaim(ClaimTypes.Role, "Administrator")
+                    builder.RequireAssertion(x => x.User.HasClaim(ClaimTypes.Role, "Модератор") ||
+                                             x.User.HasClaim(ClaimTypes.Role, "Администратор")
                     );//Необходима роль администратор или менеджер
                 });
+
                 //Доступ к контроллерам с [Authorize(Policy = "Administrator")]
-                options.AddPolicy("Administrator", builder =>
+                options.AddPolicy("Администратор", builder =>
                 {
-                    builder.RequireClaim(ClaimTypes.Role, "Administrator");//Необходима роль администратор
+                    builder.RequireClaim(ClaimTypes.Role, "Администратор");//Необходима роль администратор
                 });
-                options.AddPolicy("User", builder =>
+                options.AddPolicy("Пользователь", builder =>
                 {
-                    builder.RequireAssertion(x => x.User.HasClaim(ClaimTypes.Role, "Manager") ||
-                                             x.User.HasClaim(ClaimTypes.Role, "Administrator") ||
-                                             x.User.HasClaim(ClaimTypes.Role, "User")
+                    builder.RequireAssertion(x => x.User.HasClaim(ClaimTypes.Role, "Модератор") ||
+                                             x.User.HasClaim(ClaimTypes.Role, "Администратор") ||
+                                             x.User.HasClaim(ClaimTypes.Role, "Пользователь")
                     );//Необходима роль администратор или менеджер
                 });
             });//Добавляем авторизацию

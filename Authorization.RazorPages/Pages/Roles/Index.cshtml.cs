@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Authorization.RazorPages.Data;
 using Authorization.RazorPages.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Authorization.RazorPages.Pages.Roles
 {
+    [Authorize(Policy = "Администратор")]
     public class IndexModel : PageModel
     {
         private readonly Authorization.RazorPages.Data.ApplicationDbContext _context;
