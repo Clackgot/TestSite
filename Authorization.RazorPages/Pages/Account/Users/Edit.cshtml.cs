@@ -8,16 +8,33 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Authorization.RazorPages.Data;
 using Authorization.RazorPages.Entities;
+using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Authorization.RazorPages.Pages.Account.Users
 {
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-    
-        public EditModel(ApplicationDbContext context)
+
+
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
+
+        private List<ApplicationRole> AllRoles { get; set; }
+        private IList<string> UserRoles { get; set; }
+
+        public SelectList RolesList { get; set; }
+
+        [Display(Name = "Роль")]
+        public string SelectedRole { get; set; }
+
+
+        public EditModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -31,23 +48,42 @@ namespace Authorization.RazorPages.Pages.Account.Users
             }
 
             ApplicationUser = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
-
             if (ApplicationUser == null)
             {
                 return NotFound();
             }
+
+            AllRoles = _roleManager.Roles.ToList();
+            RolesList = new SelectList(AllRoles, SelectedRole);
+            UserRoles = await _userManager.GetRolesAsync(ApplicationUser);
+            SelectedRole = UserRoles.FirstOrDefault();
+
+
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(Guid? id, string SelectedRole)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            _context.Attach(ApplicationUser).State = EntityState.Modified;
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ApplicationUser = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+            if (ApplicationUser != null)
+            {
+                UserRoles = await _userManager.GetRolesAsync(ApplicationUser);
+
+                await _userManager.RemoveFromRolesAsync(ApplicationUser, UserRoles);
+                await _userManager.AddToRoleAsync(ApplicationUser, SelectedRole);
+                _context.Attach(ApplicationUser).State = EntityState.Modified;
+            }
 
             try
             {

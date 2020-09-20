@@ -16,9 +16,10 @@ namespace Authorization.RazorPages.Pages.Account.Users
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public CreateModel(ApplicationDbContext context)
+        public CreateModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult OnGet()
@@ -28,7 +29,7 @@ namespace Authorization.RazorPages.Pages.Account.Users
 
         [BindProperty]
         public ApplicationUser ApplicationUser { get; set; }
-        public string ApplicationUserRoleName { get; set; }
+        //public string ApplicationUserRoleName { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
